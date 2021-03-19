@@ -181,7 +181,12 @@ function getWithSpaces(max_len, curr_str, quotes=false) {
 }
 
 function generateOutput() {
-    output_text = ""
+    output_text =  "// -------------------------------------------\n"
+    output_text += "// Config for Menulib2\n"
+    output_text += "//  (https://github.com/Jomelo/LCDMenuLib2)\n"
+    output_text += "// Created with Yaml to Menulib2 parser\n"
+    output_text += "//  (https://github.com/annego15/yaml-menulib)\n"
+    output_text += "// --------------------------------------------\n\n"
 
     for (i = 0; i < MenuObject.all_childs.length; i++) {
         current_item = MenuObject.all_childs[i]
@@ -203,7 +208,7 @@ function generateOutput() {
         }
     }
 
-    output_text += `#define _LCDML_DISP_cnt    ${MenuObject.all_childs.length - 1}`
+    output_text += `\n#define _LCDML_DISP_cnt    ${MenuObject.all_childs.length - 1}`
 
     return output_text
 

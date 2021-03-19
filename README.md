@@ -1,5 +1,5 @@
 # YAML to Menulib2 parser
-This is a webpage for parsing yaml in C++ configuration for the Menulib2 project
+A webpage for parsing yaml into C++ configuration for the [Menulib2](https://github.com/Jomelo/LCDMenuLib2) project
 
 ## YAML Structure
 

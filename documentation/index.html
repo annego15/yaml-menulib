@@ -9,10 +9,10 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-BmbxuPwQa2lc/FVzBcNJ7UAyJxM6wuqIj61tLrc4wSX0szH/Ev+nYRRuWlolflfl" crossorigin="anonymous">
 
     <!-- Code mirror CSS -->
-    <link rel="stylesheet" href="css/codemirror/codemirror.css">
+    <link rel="stylesheet" href="../css/codemirror/codemirror.css">
 
     <!-- Custom CSS -->
-    <link href="css/main.css" rel="stylesheet">
+    <link href="../css/main.css" rel="stylesheet">
 
     <title>Yaml to Menulib</title>
   </head>
@@ -20,17 +20,17 @@
 
     <nav class="navbar sticky-top navbar-expand-lg navbar-light bg-light">
       <div class="container">
-        <a class="navbar-brand" href="">Yaml to Menulib2</a>
+        <a class="navbar-brand" href="../">Yaml to Menulib2</a>
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
           <span class="navbar-toggler-icon"></span>
         </button>
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
           <ul class="navbar-nav me-auto mb-2 mb-lg-0">
             <li class="nav-item">
-              <a class="nav-link active" aria-current="page" href="">Home</a>
+              <a class="nav-link" href="../">Home</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="documentation">Documentation</a>
+              <a class="nav-link active" aria-current="page" href="">Documentation</a>
             </li>
             <li class="nav-item">
               <a class="nav-link" href="https://github.com/Jomelo/LCDMenuLib2/wiki/Code-Reference">Menulib2 Code Reference</a>
@@ -48,52 +48,81 @@
     
     <div role="main" class="container">
 
-        <h1>Yaml to Menulib2 C++ config parser</h1>
-        <p>With this tool you can enter your menu-structure for <a href="https://github.com/Jomelo/LCDMenuLib2">Menulib2</a> in the yaml format. You can find the <a href="https://github.com/annego15/yaml-menulib">Documentation</a> on Github.</p>
-        <h3>Menu structure in Yaml</h3>
-        <p>Enter your menu structure in YAML format here.</p>
-        <textarea class="form-control" id="yaml_input">
-Settings:
-  Wifi: wifi_toggle
-Iformation:
-  2nd level:
-    3rd level info:
-    advanced item:
-      content: ""
-      condetion:
-      param: 10
-      settings: _LCDML_TYPE_dynParam
-    back: mFunc_back
-  simple item:
-    content: "test"
-    callback: some_function
-  back: mFunc_back</textarea>
-        <h3>Generated output for C++</h3>
-        <div id="output_top">
-          <p>Copy this into your .ino or .cpp file</p>
-          <button type="button" class="btn btn-primary">Primary</button>
-        </div>
-        <div class="output" id="output_block" style="display: block;">
-            <textarea class="form-control" id="output"></textarea>
-        </div>
+      <h1 id="yaml-to-menulib2-parser">Documentation</h1>
+      <h2 id="yaml-structure">YAML Structure</h2>
+      <h3 id="simple-menu-item-fast-method-">Simple menu item (fast method)</h3>
+      <p>For a simple menu item the key is the content (the displayed name) and the value is the callback function.</p>
+      <div class="output">
+        <textarea class="form-control" id="code1">
+Content: callback
 
-    </div>
+# If your name contains spaces you may use quotes, but it also works without them
+"Go back": mFunc_back
+Without quotes: some_function
 
+# If there is no callback, then put nothing after the double points
+NoCallback:</textarea>
+      </div>
+
+      <h3 id="simple-menu-item-detailed-method-">Simple menu item (detailed method)</h3>
+      <p>Another option is to define the callback function and content with key-value pairs one level deeper. The name of top level is ignored, but it can't be used twice on the same level.</p>
+      <div class="output">
+        <textarea class="form-control" id="code2">
+Simple:
+  content: "Menu name"
+  callback: callback_function</textarea>
+      </div>
+
+      <h3 id="sub-menu">Sub-menu</h3>
+      <p>Creating an item which is a entry into a sub-menu works by indenting the next item with two spaces (pressing tab also works)</p>
+      
+      <div class="output">
+        <textarea class="form-control" id="code3">
+"Top item":
+  "Sub item":
+  Back: mFunc_back</textarea>
+      </div>
+
+      <h3 id="advanced-menu-items">Advanced menu items</h3>
+      <p>Advanced menu items are done by specifying them with key-value pairs indented one level deeper (order of the keys not important). The key on the top level is ignored but it can&#39;t be used twice on the same level. You can omit keys you don&#39;t need, the only requirement is that at least <code>content</code> or <code>callback</code> are there. You can also have keys without a value.</p>
+      
+      <div class="output">
+        <textarea class="form-control" id="code4">
+Advanced:
+  condetion: condention_function
+  content: "Item name"
+  callback: # no value is possible
+  param: 0
+  settings: _LCDML_TYPE_dynParam</textarea>
+      </div>
+
+      <h2 id="limitations">Limitations</h2>
+      <p>It&#39;s not possible to create simple menu items with the name <code>content</code> or <code>callback</code> with the fast method. Use the detailed method instead.</p>
+      
+        
     <!-- Bootstrap Bundle with Popper -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/js/bootstrap.bundle.min.js" integrity="sha384-b5kHyXgcpbZJO/tY9Ul7kGkf1S0CWuKcCD38l8YkeH8z8QjE0GmW1gYU5S9FOnJ0" crossorigin="anonymous"></script>
 
-    <!-- Yaml parser -->
-    <script src="js/parser/js-yaml.js" ></script>
-
     <!-- Code mirror -->
-    <script src="js/codemirror/codemirror.js"></script>
-    <script src="js/codemirror/yaml.js"></script>
-    <script src="js/codemirror/clike.js"></script>
+    <script src="../js/codemirror/codemirror.js"></script>
+    <script src="../js/codemirror/yaml.js"></script>
 
-    <!-- Clipboard.js -->
-    <script src="js/clipboard/clipboard.min.js"></script>
-
-    <!-- Main Custom Script -->
-    <script src="js/main.js"></script>
-
+    <script>
+      var output = CodeMirror.fromTextArea(document.getElementById("code1"), {
+        mode: 'yaml',
+        readOnly: true,
+      });
+      var output = CodeMirror.fromTextArea(document.getElementById("code2"), {
+        mode: 'yaml',
+        readOnly: true,
+      });
+      var output = CodeMirror.fromTextArea(document.getElementById("code3"), {
+        mode: 'yaml',
+        readOnly: true,
+      });
+      var output = CodeMirror.fromTextArea(document.getElementById("code4"), {
+        mode: 'yaml',
+        readOnly: true,
+      });
+    </script>
   </body>

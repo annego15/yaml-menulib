@@ -6,7 +6,6 @@
 
 .output {
     margin-top: 1em;
-    height: 40em;
 }
 
 .output .CodeMirror {
@@ -14,6 +13,14 @@
     padding: 0.7em;
     padding-left: 1.4em;
     background-color: #ebebeb93;
+}
+
+h1 {
+    margin-top: 1em;
+}
+
+h2 {
+    margin-top: 1em;
 }
 
 h3 {
