@@ -1,0 +1,72 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-BmbxuPwQa2lc/FVzBcNJ7UAyJxM6wuqIj61tLrc4wSX0szH/Ev+nYRRuWlolflfl" crossorigin="anonymous">
+
+    <!-- Code mirror CSS -->
+    <link rel="stylesheet" href="css/codemirror/codemirror.css">
+
+    <!-- Custom CSS -->
+    <link href="css/main.css" rel="stylesheet">
+
+    <title>Yaml to Menulib</title>
+  </head>
+  <body>
+    
+    <div role="main" class="container">
+        <h1 style="margin-top: 1em;">Yaml to Menulib2 C++ config parser</h1>
+        <h3>Menu structure in Yaml</h3>
+        <p>Enter your menu structure in YAML format here.</p>
+        <textarea class="form-control" id="yaml_input">
+Settings:
+  Wifi: wifi_toggle
+Iformation:
+  2nd level:
+    3rd level info:
+    advanced item:
+      content: ""
+      condetion:
+      param: 10
+      settings: _LCDML_TYPE_dynParam
+    back: mFunc_back
+  simple item:
+    content: "test"
+    callback: some_function
+  back: mFunc_back</textarea>
+        <h3>Generated output for C++</h3>
+        <div id="output_top">
+          <p>Copy this into your .ino or .cpp file</p>
+          <button type="button" class="btn btn-primary">Primary</button>
+        </div>
+        <div class="output" id="output_block" style="display: block;">
+            <textarea class="form-control" id="output"></textarea>
+        </div>
+
+    </div>
+
+    <!-- jquery-->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+
+    <!-- Bootstrap Bundle with Popper -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/js/bootstrap.bundle.min.js" integrity="sha384-b5kHyXgcpbZJO/tY9Ul7kGkf1S0CWuKcCD38l8YkeH8z8QjE0GmW1gYU5S9FOnJ0" crossorigin="anonymous"></script>
+
+    <!-- Yaml parser -->
+    <script src="js/parser/js-yaml.js" ></script>
+
+    <!-- Code mirror -->
+    <script src="js/codemirror/codemirror.js"></script>
+    <script src="js/codemirror/yaml.js"></script>
+    <script src="js/codemirror/clike.js"></script>
+
+    <!-- Clipboard.js -->
+    <script src="js/clipboard/clipboard.min.js"></script>
+
+    <!-- Main Custom Script -->
+    <script src="js/main.js"></script>
+
+  </body>
